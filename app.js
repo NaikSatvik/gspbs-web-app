@@ -6,8 +6,11 @@ var logger = require('morgan');
 
 var session = require('express-session');
 
+// 
 var indexRouter = require('./routes/login');
 var dashRouter = require('./routes/dashboard');
+var manageFamiliesRouter = require('./routes/manageFamilies');
+// 
 
 var app = express();
 
@@ -16,7 +19,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   cookie: {
-    expires: 60000
+    expires: 600000
   }
 }));
 
@@ -30,8 +33,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 
 app.use('/', indexRouter);
 app.use('/', dashRouter);
+app.use('/', manageFamiliesRouter);
+// 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
