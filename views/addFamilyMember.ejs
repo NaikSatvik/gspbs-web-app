@@ -184,14 +184,14 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Add Family Head</h4>
+                                <h4 class="mb-0 font-size-18">Add Family Member</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">GSPBS</a></li>
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Families</a>
                                         </li>
-                                        <li class="breadcrumb-item active">Add Family Head</li>
+                                        <li class="breadcrumb-item active">Add Family Member</li>
                                     </ol>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="/add_family_head" method="post">
+                                    <form action="/add_family_member" method="post">
                                         <h4 class="header-title">Enter Details</h4>
                                         <p class="card-title-desc">Carefully enter details in each and every
                                             field.
@@ -213,8 +213,14 @@
                                             <label for="example-text-input" class="col-md-2 col-form-label">Family
                                                 Id</label>
                                             <div class="col-md-10">
-                                                <input class="form-control" type="text" value="<%= family_id %>"
-                                                    name="family_id" id="example-text-input" readonly>
+                                                <select class="form-control" name="family_id" required>
+                                                    <option value="" disabled selected>Select Family ID</option>
+                                                    <% for(var count=0; count < all_family_ids.length; count++) { %>
+                                                        <option value="<%= all_family_ids[count].FamilyID %>">
+                                                            <%= all_family_ids[count].FamilyID %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -222,7 +228,7 @@
                                             <label class="col-md-2 col-form-label">Gender</label>
                                             <div class="col-md-10">
                                                 <select class="form-control" name="gender" required>
-                                                    <option value="" disabled selected>Select Gender</option>
+                                                    <option value="" disabled selected>Select</option>
                                                     <option value="M">Male</option>
                                                     <option value="F">Female</option>
                                                 </select>
@@ -328,7 +334,7 @@
                                                 Name</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text"
-                                                    placeholder="Enter Father or Husband Name" name="middle_name"
+                                                    placeholder="Enter Father/Husband Name" name="middle_name"
                                                     id="example-text-input" required>
                                             </div>
                                         </div>
@@ -339,6 +345,22 @@
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" placeholder="+91 42316 86570"
                                                     name="mobile" id="example-text-input" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Relation to Family Head</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" name="RelationToFamHead" required>
+                                                    <option value="" disabled selected>Select Relation</option>
+                                                    <option value="FATHER">FATHER</option>
+                                                    <option value="MOTHER">MOTHER</option>
+                                                    <option value="WIFE">WIFE</option>
+                                                    <option value="SON">SON</option>
+                                                    <option value="DAUGHTER">DAUGHTER</option>
+                                                    <option value="BROTHER">BROTHER</option>
+                                                    <option value="SISTER">SISTER</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -424,7 +446,8 @@
                                             <input class="btn btn-danger" type="reset" value="Reset">
                                             &nbsp;&nbsp;
                                             <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Add
-                                                Head</button>
+                                                Member</button>
+
                                         </center>
                                     </form>
                                 </div>

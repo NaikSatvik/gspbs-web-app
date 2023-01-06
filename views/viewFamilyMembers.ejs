@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>View Family</title>
+    <title>View Family Member</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -145,6 +145,7 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="/view-family">View Family</a></li>
+                                <li><a href="/view-family-member">View Family Member</a></li>
                                 <li><a href="/add-family">Add Family Head</a></li>
                                 <li><a href="/add-family-member">Add Family Member</a></li>
                             </ul>
@@ -183,18 +184,19 @@
                 <div class="container-fluid">
 
                     <!-- start page title -->
-                    <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">View Family Head</h4>
+                                <h4 class="mb-0 font-size-18">View Family Member</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">GSPBS</a></li>
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Families</a>
                                         </li>
-                                        <li class="breadcrumb-item active">View Family</li>
+                                        <li class="breadcrumb-item"><a href="/view-family">View Family</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">View Family Member</li>
                                     </ol>
                                 </div>
                             </div>
@@ -213,13 +215,15 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- <p>This is a large modal.</p>   -->
-                                    <form class="custom-validation" action="/update_family_head" method="POST">
+                                    <form class="custom-validation" action="/update_family_member" method="POST">
                                         <div class="form-group row">
                                             <label for="example-text-input" class="col-md-2 col-form-label">Family
                                                 Id</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" id="familyId" name="familyId"
                                                     readonly>
+                                                <input class="form-control" type="text" id="MemberID" name="MemberID"
+                                                    readonly hidden>
                                             </div>
                                         </div>
 
@@ -282,6 +286,15 @@
 
                                         <div class="form-group row">
                                             <label for="example-text-input"
+                                                class="col-md-2 col-form-label">Relation</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="RelationToFamHead"
+                                                    name="RelationToFamHead">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input"
                                                 class="col-md-2 col-form-label">Native</label>
                                             <div class="col-md-10">
                                                 <input class="form-control" type="text" id="Native" name="Native">
@@ -317,7 +330,9 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h4 class="header-title">View All Family Head</h4>
+                                    <h4 class="header-title">View Family Members of <span style="color: red;">#<%=
+                                                family_id %></span>
+                                    </h4>
                                     <p class="card-title-desc">Description</p>
 
                                     <% if(action=='add' ) { %>
@@ -335,6 +350,7 @@
                                                                 <th>Gotra</th>
                                                                 <th>Email</th>
                                                                 <th>Mobile</th>
+                                                                <th>Relation</th>
                                                                 <th>Native</th>
                                                                 <th>Aadhar</th>
                                                                 <th>Actions</th>
@@ -345,8 +361,13 @@
                                                             queriedData.forEach(function(data){
                                                             %>
                                                             <tr>
+                                                                <td class="nr12" hidden>
+                                                                    <%= data.MemberID %>
+                                                                </td>
                                                                 <td class="nr1">
-                                                                    <%= data.FamilyID %>
+                                                                    <b>
+                                                                        <%= data.FamilyID %>
+                                                                    </b>
                                                                 </td>
                                                                 <td>
                                                                     <%= data.Surname %>
@@ -374,6 +395,9 @@
                                                                 <td class="nr8">
                                                                     <%= data.Mobile %>
                                                                 </td>
+                                                                <td class="nr11">
+                                                                    <%= data.RelationToFamHead %>
+                                                                </td>
                                                                 <td class="nr9">
                                                                     <%= data.Native %>
                                                                 </td>
@@ -386,13 +410,8 @@
                                                                             data-target="#exampleModal" />
                                                                     </span>
                                                                     &nbsp;
-                                                                    <a href="/view_family_members/<%= data.FamilyID %>">
-                                                                        <span>
-                                                                            <img src="images/team.png" />
-                                                                        </span>
-                                                                    </a>
-                                                                    &nbsp;&nbsp;
-                                                                    <a href="/delete_family_head/<%= data.FamilyID %>">
+                                                                    <a
+                                                                        href="/delete_family_member/<%= data.MemberID %>/<%= data.FamilyID %>">
                                                                         <span>
                                                                             <img src="images/delete.png" />
                                                                         </span>
@@ -401,7 +420,7 @@
                                                             </tr>
                                                             <% }); } else { %>
                                                                 <tr>
-                                                                    <td colspan="5">No Data Found</td>
+                                                                    <td colspan="9">No Data Found</td>
                                                                 </tr>
                                                                 <% } %>
                                                     </table>
@@ -419,15 +438,12 @@
             <!-- End Page-content -->
         </div>
         <!-- end main content-->
-
     </div>
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
     <!-- /Right-bar -->
 
-    <!-- Right bar overlay-->
-    <!-- <div class="rightbar-overlay"></div> -->
     <script>
         $(".use-address").click(function () {
             var $row = $(this).closest("tr"); // Find the row
@@ -441,6 +457,8 @@
             var $Mobile = $row.find(".nr8").text();
             var $Native = $row.find(".nr9").text();
             var $Aadhar = $row.find(".nr10").text();
+            var $RelationToFamHead = $row.find(".nr11").text();
+            var $MemberID = $row.find(".nr12").text();
 
             $("#familyId").val($familyId);
             $("#Surname").val($Surname);
@@ -452,8 +470,13 @@
             $("#Mobile").val($Mobile);
             $("#Native").val($Native);
             $("#Aadhar").val($Aadhar);
+            $("#RelationToFamHead").val($RelationToFamHead);
+            $("#MemberID").val($MemberID);
         });
     </script>
+
+    <!-- Right bar overlay-->
+    <!-- <div class="rightbar-overlay"></div> -->
     <!-- JAVASCRIPT -->
     <script src="assets/libs/jquery/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

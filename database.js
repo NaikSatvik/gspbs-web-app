@@ -10,7 +10,7 @@ connection.connect(function (error) {
     if (error) {
         throw error;
     } else {
-        console.log('DB Coneected Successfully.');
+        console.log('DB Connected Successfully.');
     }
 });
 
