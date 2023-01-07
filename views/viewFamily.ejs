@@ -202,217 +202,244 @@
                     </div>
                     <!-- end page title -->
 
-                    <!-- Family Head Modal Start -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <!-- <button type="button" class="close" data-dismiss="modal">×</button>   -->
-                                    <h4 class="modal-title">Edit Family Head</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- <p>This is a large modal.</p>   -->
-                                    <form class="custom-validation" action="/update_family_head" method="POST">
-                                        <div class="form-group row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">Family
-                                                Id</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="familyId" name="familyId"
-                                                    readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Surname</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Surname" name="Surname">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">MiddleName</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="MiddleName"
-                                                    name="MiddleName">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">FirstName</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="FirstName" name="FirstName">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Gender</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Gender" name="Gender">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Gotra</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Gotra" name="Gotra">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Email</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Email" name="Email">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Mobile</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Mobile" name="Mobile">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Native</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Native" name="Native">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Aadhar</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" id="Aadhar" name="Aadhar">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group mb-0">
-                                            <div>
-                                                <input type="submit" value="UPDATE"
-                                                    class="btn btn-primary waves-effect waves-light mr-1" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
+                    <% if(message.length> 0) { %>
+                        <div class="alert alert-success">
+                            <%= message %>
                         </div>
-                    </div>
-                    <!-- Modal End -->
+                        <% } %>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <h4 class="header-title">View All Family Head</h4>
-                                    <p class="card-title-desc">Description</p>
-
-                                    <% if(action=='add' ) { %>
-
-                                        <% } else { %>
-
-                                            <div>
-                                                <div>
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Family Id</th>
-                                                                <th>Name</th>
-                                                                <th>Gender</th>
-                                                                <th>Gotra</th>
-                                                                <th>Email</th>
-                                                                <th>Mobile</th>
-                                                                <th>Native</th>
-                                                                <th>Aadhar</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <% if(queriedData.length> 0)
-                                                            {
-                                                            queriedData.forEach(function(data){
-                                                            %>
-                                                            <tr>
-                                                                <td class="nr1">
-                                                                    <%= data.FamilyID %>
-                                                                </td>
-                                                                <td>
-                                                                    <%= data.Surname %>
-                                                                        <%= data.MiddleName %>
-                                                                            <%= data.FirstName %>
-                                                                </td>
-                                                                <td class="nr2" hidden>
-                                                                    <%= data.Surname %>
-                                                                </td>
-                                                                <td class="nr3" hidden>
-                                                                    <%= data.MiddleName %>
-                                                                </td>
-                                                                <td class="nr4" hidden>
-                                                                    <%= data.FirstName %>
-                                                                </td>
-                                                                <td class="nr5">
-                                                                    <%= data.Gender %>
-                                                                </td>
-                                                                <td class="nr6">
-                                                                    <%= data.Gotra %>
-                                                                </td>
-                                                                <td class="nr7">
-                                                                    <%= data.EmailID %>
-                                                                </td>
-                                                                <td class="nr8">
-                                                                    <%= data.Mobile %>
-                                                                </td>
-                                                                <td class="nr9">
-                                                                    <%= data.Native %>
-                                                                </td>
-                                                                <td class="nr10">
-                                                                    <%= data.Aadhar %>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="use-address">
-                                                                        <img src="images/edit.png" data-toggle="modal"
-                                                                            data-target="#exampleModal" />
-                                                                    </span>
-                                                                    &nbsp;
-                                                                    <a href="/view_family_members/<%= data.FamilyID %>">
-                                                                        <span>
-                                                                            <img src="images/team.png" />
-                                                                        </span>
-                                                                    </a>
-                                                                    &nbsp;&nbsp;
-                                                                    <a href="/delete_family_head/<%= data.FamilyID %>">
-                                                                        <span>
-                                                                            <img src="images/delete.png" />
-                                                                        </span>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                            <% }); } else { %>
-                                                                <tr>
-                                                                    <td colspan="5">No Data Found</td>
-                                                                </tr>
-                                                                <% } %>
-                                                    </table>
-                                                </div>
-
-                                            </div>
-                                            <% } %>
+                            <% if(messageRed.length> 0) { %>
+                                <div class="alert alert-danger">
+                                    <%= messageRed %>
                                 </div>
-                            </div>
-                        </div> <!-- end col -->
-                    </div> <!-- end row -->
+                                <% } %>
+
+                                    <!-- Family Head Modal Start -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <!-- <button type="button" class="close" data-dismiss="modal">×</button>   -->
+                                                    <h4 class="modal-title">Edit Family Head</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- <p>This is a large modal.</p>   -->
+                                                    <form class="custom-validation" action="/update_family_head"
+                                                        method="POST">
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Family
+                                                                Id</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="familyId"
+                                                                    name="familyId" readonly>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Surname</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Surname"
+                                                                    name="Surname">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">MiddleName</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="MiddleName"
+                                                                    name="MiddleName">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">FirstName</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="FirstName"
+                                                                    name="FirstName">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Gender</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Gender"
+                                                                    name="Gender">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Gotra</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Gotra"
+                                                                    name="Gotra">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Email</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Email"
+                                                                    name="Email">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Mobile</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Mobile"
+                                                                    name="Mobile">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Native</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Native"
+                                                                    name="Native">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="example-text-input"
+                                                                class="col-md-2 col-form-label">Aadhar</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text" id="Aadhar"
+                                                                    name="Aadhar">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group mb-0">
+                                                            <div>
+                                                                <input type="submit" value="UPDATE"
+                                                                    class="btn btn-primary waves-effect waves-light mr-1" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal End -->
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+
+                                                    <h4 class="header-title">View All Family Head</h4>
+                                                    <p class="card-title-desc">Description</p>
+
+                                                    <% if(action=='add' ) { %>
+
+                                                        <% } else { %>
+
+                                                            <div>
+                                                                <div>
+                                                                    <table class="table table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Family Id</th>
+                                                                                <th>Name</th>
+                                                                                <th>Gender</th>
+                                                                                <th>Gotra</th>
+                                                                                <th>Email</th>
+                                                                                <th>Mobile</th>
+                                                                                <th>Native</th>
+                                                                                <th>Actions</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <% if(queriedData.length> 0)
+                                                                            {
+                                                                            queriedData.forEach(function(data){
+                                                                            %>
+                                                                            <tr>
+                                                                                <td class="nr1">
+                                                                                    <%= data.FamilyID %>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%= data.Surname %>
+                                                                                        <%= data.MiddleName %>
+                                                                                            <%= data.FirstName %>
+                                                                                </td>
+                                                                                <td class="nr2" hidden>
+                                                                                    <%= data.Surname %>
+                                                                                </td>
+                                                                                <td class="nr3" hidden>
+                                                                                    <%= data.MiddleName %>
+                                                                                </td>
+                                                                                <td class="nr4" hidden>
+                                                                                    <%= data.FirstName %>
+                                                                                </td>
+                                                                                <td class="nr5">
+                                                                                    <%= data.Gender %>
+                                                                                </td>
+                                                                                <td class="nr6">
+                                                                                    <%= data.Gotra %>
+                                                                                </td>
+                                                                                <td class="nr7">
+                                                                                    <%= data.EmailID %>
+                                                                                </td>
+                                                                                <td class="nr8">
+                                                                                    <%= data.Mobile %>
+                                                                                </td>
+                                                                                <td class="nr9">
+                                                                                    <%= data.Native %>
+                                                                                </td>
+                                                                                <td class="nr10" hidden>
+                                                                                    <%= data.Aadhar %>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span class="use-address">
+                                                                                        <img src="images/edit.png"
+                                                                                            data-toggle="modal"
+                                                                                            data-target="#exampleModal" />
+                                                                                    </span>
+                                                                                    &nbsp;
+                                                                                    <a
+                                                                                        href="/view_family_members/<%= data.FamilyID %>">
+                                                                                        <span>
+                                                                                            <img
+                                                                                                src="images/team.png" />
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    &nbsp;&nbsp;
+                                                                                    <a
+                                                                                        href="/delete_family_head/<%= data.FamilyID %>">
+                                                                                        <span>
+                                                                                            <img
+                                                                                                src="images/delete.png" />
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <% }); } else { %>
+                                                                                <tr>
+                                                                                    <td colspan="5">No Data Found</td>
+                                                                                </tr>
+                                                                                <% } %>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                            <% } %>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
 
                 </div> <!-- container-fluid -->
             </div>

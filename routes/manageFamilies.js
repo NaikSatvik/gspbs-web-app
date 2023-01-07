@@ -20,7 +20,7 @@ router.get('/add-family', function (req, res, next) {
                 throw error;
             } else {
                 fam_id = Number(extractValue(data, 'MAX(FamilyID)')) + 1;
-                res.render('addFamily', { title: 'Express', session: req.session, family_id: fam_id });
+                res.render('addFamily', { title: 'Express', session: req.session, family_id: fam_id, message: req.flash('success') });
             }
         });
     }
@@ -53,6 +53,7 @@ router.post('/add_family_head', function (request, response, next) {
             if (error) {
                 throw error;
             } else {
+                request.flash('success', 'Family Head added successfully.');
                 response.redirect('/add-family');
             }
         });
@@ -70,7 +71,7 @@ router.get('/view-family', function (req, res, next) {
                 throw error;
             } else {
                 // fam_id = Number(extractValue(data, 'MAX(FamilyID)')) + 1;
-                res.render('viewFamily', { session: req.session, action: 'list', queriedData: data });
+                res.render('viewFamily', { session: req.session, action: 'list', queriedData: data, message: req.flash('success'), messageRed: req.flash('danger') });
             }
         });
     }
@@ -110,6 +111,7 @@ router.post('/update_family_head', function (request, response, next) {
             if (error) {
                 throw error;
             } else {
+                request.flash('success', '#' + family_id + ' Family Head updated successfully.');
                 response.redirect('/view-family');
             }
         });
@@ -131,6 +133,7 @@ router.get('/delete_family_head/:FamilyID', function (request, response, next) {
             if (error) {
                 throw error;
             } else {
+                request.flash('danger', '#' + family_id + ' Family Head removed successfully.');
                 response.redirect("/view-family");
             }
         });
@@ -152,7 +155,7 @@ router.get('/view_family_members/:FamilyID', function (request, response, next) 
             if (error) {
                 throw error;
             } else {
-                response.render('viewFamilyMembers', { session: request.session, action: 'list', queriedData: data, family_id: family_id });
+                response.render('viewFamilyMembers', { session: request.session, action: 'list', queriedData: data, family_id: family_id, message: request.flash('success'), messageRed: request.flash('danger') });
             }
         });
     }
@@ -197,6 +200,7 @@ router.post('/update_family_member', function (request, response, next) {
             if (error) {
                 throw error;
             } else {
+                request.flash('success', '(#' + family_id + ') Family Member updated successfully.');
                 response.redirect('/view_family_members/' + family_id);
             }
         });
@@ -219,6 +223,7 @@ router.get('/delete_family_member/:MemberID/:FamilyID', function (request, respo
             if (error) {
                 throw error;
             } else {
+                request.flash('danger', '(#' + family_id + ') Family Member removed successfully.');
                 response.redirect('/view_family_members/' + family_id);
             }
         });
@@ -235,7 +240,7 @@ router.get('/add-family-member', function (req, res, next) {
             if (error) {
                 throw error;
             } else {
-                res.render('addFamilyMember', { session: req.session, all_family_ids: data });
+                res.render('addFamilyMember', { session: req.session, all_family_ids: data, message: req.flash('success') });
             }
         });
     }
@@ -269,6 +274,7 @@ router.post('/add_family_member', function (request, response, next) {
             if (error) {
                 throw error;
             } else {
+                request.flash('success', 'Family Member added successfully.');
                 response.redirect('/add-family-member');
             }
         });

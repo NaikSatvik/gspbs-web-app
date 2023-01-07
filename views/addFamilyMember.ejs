@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Add Family</title>
+    <title>Add Family Member</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -199,263 +199,281 @@
                     </div>
                     <!-- end page title -->
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="/add_family_member" method="post">
-                                        <h4 class="header-title">Enter Details</h4>
-                                        <p class="card-title-desc">Carefully enter details in each and every
-                                            field.
-                                        </p>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">Family
-                                                Id</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="family_id" required>
-                                                    <option value="" disabled selected>Select Family ID</option>
-                                                    <% for(var count=0; count < all_family_ids.length; count++) { %>
-                                                        <option value="<%= all_family_ids[count].FamilyID %>">
-                                                            <%= all_family_ids[count].FamilyID %>
-                                                        </option>
-                                                        <% } %>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Gender</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="gender" required>
-                                                    <option value="" disabled selected>Select</option>
-                                                    <option value="M">Male</option>
-                                                    <option value="F">Female</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Surname</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="surname" required>
-                                                    <option value="" disabled selected>Select Surname</option>
-                                                    <option value="BAHUGUNA">BAHUGUNA</option>
-                                                    <option value="CHATURVEDI">CHATURVEDI</option>
-                                                    <option value="CHAUBE">CHAUBE</option>
-                                                    <option value="CHAUBEY">CHAUBEY</option>
-                                                    <option value="DUBE">DUBE</option>
-                                                    <option value="DUBEY">DUBEY</option>
-                                                    <option value="DWIVEDI">DWIVEDI</option>
-                                                    <option value="GIRI">GIRI</option>
-                                                    <option value="GOSWAMI">GOSWAMI</option>
-                                                    <option value="JOSHI">JOSHI</option>
-                                                    <option value="MEHTA">MEHTA</option>
-                                                    <option value="MISHRA">MISHRA</option>
-                                                    <option value="OJHA">OJHA</option>
-                                                    <option value="PANDEY">PANDEY</option>
-                                                    <option value="PATHAK">PATHAK</option>
-                                                    <option value="SHANDILYA">SHANDILYA</option>
-                                                    <option value="SHARMA">SHARMA</option>
-                                                    <option value="SHUKLA">SHUKLA</option>
-                                                    <option value="SUTAR">SUTAR</option>
-                                                    <option value="TIWARI">TIWARI</option>
-                                                    <option value="TRIPATHI">TRIPATHI</option>
-                                                    <option value="UPADHYAY">UPADHYAY</option>
-                                                    <option value="VYAS">VYAS</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Gotra</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="gotra" required>
-                                                    <option value="" disabled selected>Select Gotra</option>
-                                                    <option value="ANGRISH">ANGRISH</option>
-                                                    <option value="ANKRISH">ANKRISH</option>
-                                                    <option value="ATRI">ATRI</option>
-                                                    <option value="AUDICHYA">AUDICHYA</option>
-                                                    <option value="AUGUTSAY">AUGUTSAY</option>
-                                                    <option value="BHARDWAJ">BHARDWAJ</option>
-                                                    <option value="BHRIGU">BHRIGU</option>
-                                                    <option value="CHANDRATREY">CHANDRATREY</option>
-                                                    <option value="CHANDRAYAN">CHANDRAYAN</option>
-                                                    <option value="DHRAT KAUSHIK">DHRAT KAUSHIK</option>
-                                                    <option value="GARG">GARG</option>
-                                                    <option value="GAUTAM">GAUTAM</option>
-                                                    <option value="GAUTAM (KAPISA)">GAUTAM (KAPISA)</option>
-                                                    <option value="GAUTAM (MADHUBANI)">GAUTAM (MADHUBANI)
-                                                    </option>
-                                                    <option value="GYAN">GYAN</option>
-                                                    <option value="KASHYAP">KASHYAP</option>
-                                                    <option value="KASHYUP (KANTIT PARWA)">KASHYUP (KANTIT
-                                                        PARWA)
-                                                    </option>
-                                                    <option value="KATYAYINI">KATYAYINI</option>
-                                                    <option value="KAUSHALY">KAUSHALY</option>
-                                                    <option value="KAUSHIK">KAUSHIK</option>
-                                                    <option value="MAHARUSHI">MAHARUSHI</option>
-                                                    <option value="PACHAURI">PACHAURI</option>
-                                                    <option value="PARASHAR">PARASHAR</option>
-                                                    <option value="RISHABH">RISHABH</option>
-                                                    <option value="SANDILYA">SANDILYA</option>
-                                                    <option value="SANDILYA-SARJAN">SANDILYA-SARJAN</option>
-                                                    <option value="SANKRIT">SANKRIT</option>
-                                                    <option value="SAVARNA">SAVARNA</option>
-                                                    <option value="SHRIMUKH SHANDILYA">SHRIMUKH SHANDILYA
-                                                    </option>
-                                                    <option value="SUNARI">SUNARI</option>
-                                                    <option value="SURVANSHAM">SURVANSHAM</option>
-                                                    <option value="TIWARI OGOTRA">TIWARI OGOTRA</option>
-                                                    <option value="TIWARIGOTRA">TIWARIGOTRA</option>
-                                                    <option value="UDDALAK">UDDALAK</option>
-                                                    <option value="UPMAN">UPMAN</option>
-                                                    <option value="UPMANYU">UPMANYU</option>
-                                                    <option value="VASIST">VASIST</option>
-                                                    <option value="VATSA">VATSA</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">First
-                                                Name</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" placeholder="Enter First Name"
-                                                    name="first_name" id="example-text-input" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input"
-                                                class="col-md-2 col-form-label">Father/Husband
-                                                Name</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text"
-                                                    placeholder="Enter Father/Husband Name" name="middle_name"
-                                                    id="example-text-input" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">Mobile
-                                                No.</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" placeholder="+91 42316 86570"
-                                                    name="mobile" id="example-text-input" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Relation to Family Head</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="RelationToFamHead" required>
-                                                    <option value="" disabled selected>Select Relation</option>
-                                                    <option value="FATHER">FATHER</option>
-                                                    <option value="MOTHER">MOTHER</option>
-                                                    <option value="WIFE">WIFE</option>
-                                                    <option value="SON">SON</option>
-                                                    <option value="DAUGHTER">DAUGHTER</option>
-                                                    <option value="BROTHER">BROTHER</option>
-                                                    <option value="SISTER">SISTER</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-email-input" class="col-md-2 col-form-label">Email
-                                                Id</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="email" placeholder="user@gmail.com"
-                                                    name="email" id="example-email-input" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Native</label>
-                                            <div class="col-md-10">
-                                                <select class="form-control" name="native" required>
-                                                    <option value="" disabled selected>Select Native</option>
-                                                    <option value="AAJAMGADH">AAJAMGADH</option>
-                                                    <option value="ALLAHABAD">ALLAHABAD</option>
-                                                    <option value="AMBEDKARNAGAR U.P">AMBEDKARNAGAR U.P</option>
-                                                    <option value="AMETHI">AMETHI</option>
-                                                    <option value="BALIYA">BALIYA</option>
-                                                    <option value="BALRAMPUR">BALRAMPUR</option>
-                                                    <option value="BARABANKI">BARABANKI</option>
-                                                    <option value="BARWANI">BARWANI</option>
-                                                    <option value="BASTI">BASTI</option>
-                                                    <option value="BHADODI">BHADODI</option>
-                                                    <option value="BHOPAL">BHOPAL</option>
-                                                    <option value="BIHAR">BIHAR</option>
-                                                    <option value="CHITRAKUT">CHITRAKUT</option>
-                                                    <option value="DEORIA">DEORIA</option>
-                                                    <option value="DEVARIYA">DEVARIYA</option>
-                                                    <option value="FAIZABAD">FAIZABAD</option>
-                                                    <option value="GONDA">GONDA</option>
-                                                    <option value="GORAKHPUR">GORAKHPUR</option>
-                                                    <option value="GORAKHPUR UP">GORAKHPUR UP</option>
-                                                    <option value="GUJARAT">GUJARAT</option>
-                                                    <option value="HMT">HMT</option>
-                                                    <option value="INDORE">INDORE</option>
-                                                    <option value="JAUNPUR">JAUNPUR</option>
-                                                    <option value="KANPUR">KANPUR</option>
-                                                    <option value="KUSHINAGAR">KUSHINAGAR</option>
-                                                    <option value="MIRZAPUR">MIRZAPUR</option>
-                                                    <option value="MP">MP</option>
-                                                    <option value="MUJZAFARPUR">MUJZAFARPUR</option>
-                                                    <option value="NATHDWARA">NATHDWARA</option>
-                                                    <option value="PANNA (MP)">PANNA (MP)</option>
-                                                    <option value="PRATAPGADHA">PRATAPGADHA</option>
-                                                    <option value="RAIBARELI">RAIBARELI</option>
-                                                    <option value="REWA">REWA</option>
-                                                    <option value="SAMHO ITAWA">SAMHO ITAWA</option>
-                                                    <option value="SANT KABIR NAGAR">SANT KABIR NAGAR</option>
-                                                    <option value="SIDDHARTHNAGAR">SIDDHARTHNAGAR</option>
-                                                    <option value="SIWAN">SIWAN</option>
-                                                    <option value="SULTANPUR">SULTANPUR</option>
-                                                    <option value="UTTAR PRADESH">UTTAR PRADESH</option>
-                                                    <option value="VARANASI">VARANASI</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="example-text-input" class="col-md-2 col-form-label">Upload
-                                                Aadhar</label>
-                                            <div class="col-md-10">
-                                                <input class="form-control" type="text" value="Pending" name="aadhar"
-                                                    id="example-text-input" required>
-                                            </div>
-                                        </div>
-
-                                        <center>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="tandc"
-                                                    id="customCheck2" required>
-                                                <label class="custom-control-label" for="customCheck2">I have Read All
-                                                    Privacy and Policy and Agreed To Registeration. <a href="">Privacy &
-                                                        Policy</a></label>
-                                            </div>
-                                        </center>
-                                        <br>
-                                        <center>
-                                            <input class="btn btn-danger" type="reset" value="Reset">
-                                            &nbsp;&nbsp;
-                                            <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Add
-                                                Member</button>
-
-                                        </center>
-                                    </form>
-                                </div>
-                            </div>
+                    <% if(message.length> 0) { %>
+                        <div class="alert alert-success">
+                            <%= message %>
                         </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- end row -->
+                        <% } %>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="/add_family_member" method="post">
+                                                <h4 class="header-title">Enter Details</h4>
+                                                <p class="card-title-desc">Carefully enter details in each and every
+                                                    field.
+                                                </p>
+
+                                                <div class="form-group row">
+                                                    <label for="example-text-input"
+                                                        class="col-md-2 col-form-label">Family
+                                                        Id</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" name="family_id" required>
+                                                            <option value="" disabled selected>Select Family ID</option>
+                                                            <% for(var count=0; count < all_family_ids.length; count++)
+                                                                { %>
+                                                                <option value="<%= all_family_ids[count].FamilyID %>">
+                                                                    <%= all_family_ids[count].FamilyID %>
+                                                                </option>
+                                                                <% } %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">Gender</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" name="gender" required>
+                                                            <option value="" disabled selected>Select</option>
+                                                            <option value="M">Male</option>
+                                                            <option value="F">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">Surname</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" name="surname" required>
+                                                            <option value="" disabled selected>Select Surname</option>
+                                                            <option value="BAHUGUNA">BAHUGUNA</option>
+                                                            <option value="CHATURVEDI">CHATURVEDI</option>
+                                                            <option value="CHAUBE">CHAUBE</option>
+                                                            <option value="CHAUBEY">CHAUBEY</option>
+                                                            <option value="DUBE">DUBE</option>
+                                                            <option value="DUBEY">DUBEY</option>
+                                                            <option value="DWIVEDI">DWIVEDI</option>
+                                                            <option value="GIRI">GIRI</option>
+                                                            <option value="GOSWAMI">GOSWAMI</option>
+                                                            <option value="JOSHI">JOSHI</option>
+                                                            <option value="MEHTA">MEHTA</option>
+                                                            <option value="MISHRA">MISHRA</option>
+                                                            <option value="OJHA">OJHA</option>
+                                                            <option value="PANDEY">PANDEY</option>
+                                                            <option value="PATHAK">PATHAK</option>
+                                                            <option value="SHANDILYA">SHANDILYA</option>
+                                                            <option value="SHARMA">SHARMA</option>
+                                                            <option value="SHUKLA">SHUKLA</option>
+                                                            <option value="SUTAR">SUTAR</option>
+                                                            <option value="TIWARI">TIWARI</option>
+                                                            <option value="TRIPATHI">TRIPATHI</option>
+                                                            <option value="UPADHYAY">UPADHYAY</option>
+                                                            <option value="VYAS">VYAS</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">Gotra</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" name="gotra" required>
+                                                            <option value="" disabled selected>Select Gotra</option>
+                                                            <option value="ANGRISH">ANGRISH</option>
+                                                            <option value="ANKRISH">ANKRISH</option>
+                                                            <option value="ATRI">ATRI</option>
+                                                            <option value="AUDICHYA">AUDICHYA</option>
+                                                            <option value="AUGUTSAY">AUGUTSAY</option>
+                                                            <option value="BHARDWAJ">BHARDWAJ</option>
+                                                            <option value="BHRIGU">BHRIGU</option>
+                                                            <option value="CHANDRATREY">CHANDRATREY</option>
+                                                            <option value="CHANDRAYAN">CHANDRAYAN</option>
+                                                            <option value="DHRAT KAUSHIK">DHRAT KAUSHIK</option>
+                                                            <option value="GARG">GARG</option>
+                                                            <option value="GAUTAM">GAUTAM</option>
+                                                            <option value="GAUTAM (KAPISA)">GAUTAM (KAPISA)</option>
+                                                            <option value="GAUTAM (MADHUBANI)">GAUTAM (MADHUBANI)
+                                                            </option>
+                                                            <option value="GYAN">GYAN</option>
+                                                            <option value="KASHYAP">KASHYAP</option>
+                                                            <option value="KASHYUP (KANTIT PARWA)">KASHYUP (KANTIT
+                                                                PARWA)
+                                                            </option>
+                                                            <option value="KATYAYINI">KATYAYINI</option>
+                                                            <option value="KAUSHALY">KAUSHALY</option>
+                                                            <option value="KAUSHIK">KAUSHIK</option>
+                                                            <option value="MAHARUSHI">MAHARUSHI</option>
+                                                            <option value="PACHAURI">PACHAURI</option>
+                                                            <option value="PARASHAR">PARASHAR</option>
+                                                            <option value="RISHABH">RISHABH</option>
+                                                            <option value="SANDILYA">SANDILYA</option>
+                                                            <option value="SANDILYA-SARJAN">SANDILYA-SARJAN</option>
+                                                            <option value="SANKRIT">SANKRIT</option>
+                                                            <option value="SAVARNA">SAVARNA</option>
+                                                            <option value="SHRIMUKH SHANDILYA">SHRIMUKH SHANDILYA
+                                                            </option>
+                                                            <option value="SUNARI">SUNARI</option>
+                                                            <option value="SURVANSHAM">SURVANSHAM</option>
+                                                            <option value="TIWARI OGOTRA">TIWARI OGOTRA</option>
+                                                            <option value="TIWARIGOTRA">TIWARIGOTRA</option>
+                                                            <option value="UDDALAK">UDDALAK</option>
+                                                            <option value="UPMAN">UPMAN</option>
+                                                            <option value="UPMANYU">UPMANYU</option>
+                                                            <option value="VASIST">VASIST</option>
+                                                            <option value="VATSA">VATSA</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="example-text-input"
+                                                        class="col-md-2 col-form-label">First
+                                                        Name</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter First Name" name="first_name"
+                                                            id="example-text-input" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="example-text-input"
+                                                        class="col-md-2 col-form-label">Father/Husband
+                                                        Name</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="Enter Father/Husband Name" name="middle_name"
+                                                            id="example-text-input" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="example-text-input"
+                                                        class="col-md-2 col-form-label">Mobile
+                                                        No.</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text"
+                                                            placeholder="+91 42316 86570" name="mobile"
+                                                            id="example-text-input" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">Relation to Family
+                                                        Head</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" name="RelationToFamHead" required>
+                                                            <option value="" disabled selected>Select Relation</option>
+                                                            <option value="FATHER">FATHER</option>
+                                                            <option value="MOTHER">MOTHER</option>
+                                                            <option value="WIFE">WIFE</option>
+                                                            <option value="SON">SON</option>
+                                                            <option value="DAUGHTER">DAUGHTER</option>
+                                                            <option value="BROTHER">BROTHER</option>
+                                                            <option value="SISTER">SISTER</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="example-email-input"
+                                                        class="col-md-2 col-form-label">Email
+                                                        Id</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="email"
+                                                            placeholder="user@gmail.com" name="email"
+                                                            id="example-email-input" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 col-form-label">Native</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" name="native" required>
+                                                            <option value="" disabled selected>Select Native</option>
+                                                            <option value="AAJAMGADH">AAJAMGADH</option>
+                                                            <option value="ALLAHABAD">ALLAHABAD</option>
+                                                            <option value="AMBEDKARNAGAR U.P">AMBEDKARNAGAR U.P</option>
+                                                            <option value="AMETHI">AMETHI</option>
+                                                            <option value="BALIYA">BALIYA</option>
+                                                            <option value="BALRAMPUR">BALRAMPUR</option>
+                                                            <option value="BARABANKI">BARABANKI</option>
+                                                            <option value="BARWANI">BARWANI</option>
+                                                            <option value="BASTI">BASTI</option>
+                                                            <option value="BHADODI">BHADODI</option>
+                                                            <option value="BHOPAL">BHOPAL</option>
+                                                            <option value="BIHAR">BIHAR</option>
+                                                            <option value="CHITRAKUT">CHITRAKUT</option>
+                                                            <option value="DEORIA">DEORIA</option>
+                                                            <option value="DEVARIYA">DEVARIYA</option>
+                                                            <option value="FAIZABAD">FAIZABAD</option>
+                                                            <option value="GONDA">GONDA</option>
+                                                            <option value="GORAKHPUR">GORAKHPUR</option>
+                                                            <option value="GORAKHPUR UP">GORAKHPUR UP</option>
+                                                            <option value="GUJARAT">GUJARAT</option>
+                                                            <option value="HMT">HMT</option>
+                                                            <option value="INDORE">INDORE</option>
+                                                            <option value="JAUNPUR">JAUNPUR</option>
+                                                            <option value="KANPUR">KANPUR</option>
+                                                            <option value="KUSHINAGAR">KUSHINAGAR</option>
+                                                            <option value="MIRZAPUR">MIRZAPUR</option>
+                                                            <option value="MP">MP</option>
+                                                            <option value="MUJZAFARPUR">MUJZAFARPUR</option>
+                                                            <option value="NATHDWARA">NATHDWARA</option>
+                                                            <option value="PANNA (MP)">PANNA (MP)</option>
+                                                            <option value="PRATAPGADHA">PRATAPGADHA</option>
+                                                            <option value="RAIBARELI">RAIBARELI</option>
+                                                            <option value="REWA">REWA</option>
+                                                            <option value="SAMHO ITAWA">SAMHO ITAWA</option>
+                                                            <option value="SANT KABIR NAGAR">SANT KABIR NAGAR</option>
+                                                            <option value="SIDDHARTHNAGAR">SIDDHARTHNAGAR</option>
+                                                            <option value="SIWAN">SIWAN</option>
+                                                            <option value="SULTANPUR">SULTANPUR</option>
+                                                            <option value="UTTAR PRADESH">UTTAR PRADESH</option>
+                                                            <option value="VARANASI">VARANASI</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="example-text-input"
+                                                        class="col-md-2 col-form-label">Upload
+                                                        Aadhar</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text" value="Pending"
+                                                            name="aadhar" id="example-text-input" required>
+                                                    </div>
+                                                </div>
+
+                                                <center>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" name="tandc"
+                                                            id="customCheck2" required>
+                                                        <label class="custom-control-label" for="customCheck2">I have
+                                                            Read All
+                                                            Privacy and Policy and Agreed To Registeration. <a
+                                                                href="">Privacy &
+                                                                Policy</a></label>
+                                                    </div>
+                                                </center>
+                                                <br>
+                                                <center>
+                                                    <input class="btn btn-danger" type="reset" value="Reset">
+                                                    &nbsp;&nbsp;
+                                                    <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Add
+                                                        Member</button>
+
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                            </div>
+                            <!-- end row -->
                 </div>
             </div> <!-- container-fluid -->
         </div>

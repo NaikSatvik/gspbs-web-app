@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var session = require('express-session');
+var flash = require('connect-flash');
 
 // 
 var indexRouter = require('./routes/login');
@@ -16,12 +17,15 @@ var app = express();
 
 app.use(session({
   secret: 'gsbpsweb',
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   cookie: {
     expires: 600000
   }
 }));
+
+// Flash Module.
+app.use(flash());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
