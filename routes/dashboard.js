@@ -8,7 +8,7 @@ router.get('/dashboard', function (req, res, next) {
     if (!req.session.FamilyID) {
         res.redirect('/');
     } else {
-        res.render('dashboard', { title: 'Express', session: req.session });
+        res.render('dashboard', { session: req.session });
     }
 });
 

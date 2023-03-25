@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Admin Dashboard</title>
+    <title>View Events</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -20,7 +20,8 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 <body data-sidebar="dark">
@@ -147,6 +148,7 @@
                                 <li><a href="/add-family-member">Add Family Member</a></li>
                             </ul>
                         </li>
+
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="mdi mdi-google-pages"></i>
@@ -184,12 +186,14 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Dashboard</h4>
+                                <h4 class="mb-0 font-size-18">View Events</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">GSPBS</a></li>
-                                        <li class="breadcrumb-item active">Dashboard</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Events</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a href="">View Events</a>
                                     </ol>
                                 </div>
 
@@ -199,26 +203,140 @@
                     <!-- end page title -->
                     <!-- end page title -->
 
-                    <div class="row">
+                    <!-- Modal Start -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- <button type="button" class="close" data-dismiss="modal">×</button>   -->
+                                    <h4 class="modal-title">Edit Event</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- <p>This is a large modal.</p>   -->
+                                    <form class="custom-validation" action="/update_event" method="POST">
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Event
+                                                Id</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="eventId" name="eventId"
+                                                    readonly>
+                                            </div>
+                                        </div>
 
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Event
+                                                Title</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" id="eventTitle"
+                                                    name="eventTitle">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Event
+                                                Description</label>
+                                            <div class="col-md-10">
+                                                <textarea id="eventDesc" name="eventDesc" class="form-control"
+                                                    maxlength="225" rows="3"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-0">
+                                            <div>
+                                                <input type="submit" value="UPDATE"
+                                                    class="btn btn-primary waves-effect waves-light mr-1" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- end row -->
 
-                    <div class="row">
+                    <% if(message.length> 0) { %>
+                        <div class="alert alert-success">
+                            <%= message %>
+                        </div>
+                        <% } %>
 
-                    </div>
-                    <!-- end row -->
+                            <% if(messageRed.length> 0) { %>
+                                <div class="alert alert-danger">
+                                    <%= messageRed %>
+                                </div>
+                                <% } %>
 
-                    <div class="row">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="header-title">Events</h4>
+                                                    <p class="card-title-desc">Description</p>
 
-                    </div>
-                    <!-- end row -->
+                                                    <% if(action=='add' ) { %>
 
+                                                        <% } else { %>
 
-                    <div class="row">
+                                                            <% if(queriedData.length> 0)
+                                                                {
+                                                                queriedData.forEach(function(data){
+                                                                %>
+                                                                <div class="media mb-2">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td class="nr1" hidden>
+                                                                                <%= data.EventID %>
+                                                                            </td>
+                                                                            <td><img class="d-flex align-self-center rounded mr-3"
+                                                                                    src="<%= data.ImageUrl %>"
+                                                                                    alt="event_image" width="64"
+                                                                                    height="64"></td>
+                                                                            <td>
+                                                                                <div class="media-body">
+                                                                                    <h5 class="font-size-15">
+                                                                                        <span class="nr2">
+                                                                                            <%= data.EventTitle %>
+                                                                                        </span>
+                                                                                    </h5>
+                                                                                    <p class="mb-2">
+                                                                                        <span class="nr3">
+                                                                                            <%= data.EventDescription %>
+                                                                                        </span>
+                                                                                    </p>
+                                                                                    <p style="text-align: right;">
+                                                                                        <span class="use-address">
+                                                                                            <img src="images/edit.png"
+                                                                                                data-toggle="modal"
+                                                                                                data-target="#exampleModal" />
+                                                                                        </span>
+                                                                                        &nbsp;&nbsp;
 
-                    </div>
-                    <!-- end row -->
+                                                                                        <a
+                                                                                            href="/delete_event/<%= data.EventID %>">
+                                                                                            <span>
+                                                                                                <img
+                                                                                                    src="images/delete.png" />
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                                <% }); } else { %>
+                                                                    <span>No Data Found</span>
+                                                                    <% } %>
+
+                                                                        <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
 
                 </div> <!-- container-fluid -->
             </div>
@@ -234,7 +352,6 @@
 
     <!-- Right bar overlay-->
     <!-- <div class="rightbar-overlay"></div> -->
-
     <!-- JAVASCRIPT -->
     <script src="assets/libs/jquery/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -254,6 +371,19 @@
     <script src="assets/js/pages/dashboard.init.js"></script>
 
     <script src="assets/js/app.js"></script>
+
+    <script>
+        $(".use-address").click(function () {
+            var $row = $(this).closest("tr"); // Find the row
+            var $eventId = $row.find(".nr1").text(); // Find the id
+            var $eventTitle = $row.find(".nr2").text();
+            var $eventDesc = $row.find(".nr3").text();
+
+            $("#eventId").val($eventId);
+            $("#eventTitle").val($eventTitle);
+            $("#eventDesc").val($eventDesc);
+        });
+    </script>
 
 </body>
 

@@ -11,6 +11,7 @@ var flash = require('connect-flash');
 var indexRouter = require('./routes/login');
 var dashRouter = require('./routes/dashboard');
 var manageFamiliesRouter = require('./routes/manageFamilies');
+var manageEventsRouter = require('./routes/manageEvents');
 // 
 
 var app = express();
@@ -42,6 +43,7 @@ app.use('/view_family_members', express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', dashRouter);
 app.use('/', manageFamiliesRouter);
+app.use('/', manageEventsRouter);
 // 
 
 // catch 404 and forward to error handler

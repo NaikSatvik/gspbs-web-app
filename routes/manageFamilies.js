@@ -14,7 +14,7 @@ router.get('/add-family', function (req, res, next) {
             return extractedValue;
         }
 
-        var query = "SELECT MAX(FamilyID) FROM FamilyHead";
+        var query = "SELECT MAX(FamilyID) FROM FamilyHeadMaster";
         database.query(query, function (error, data) {
             if (error) {
                 throw error;
@@ -44,7 +44,7 @@ router.post('/add_family_head', function (request, response, next) {
         var tandc = request.body.tandc;
 
         var query = `
-    INSERT INTO FamilyHead
+    INSERT INTO FamilyHeadMaster
     (FamilyID, Password, Gender, Surname, Gotra, FirstName, MiddleName, Mobile, EmailID, Native, Aadhar, TandC)
     VALUES ("${family_id}", "GSPBS", "${gender}", "${surname}", "${gotra}", "${first_name}", "${middle_name}", "${mobile}", "${email}", "${native}", "${aadhar}", "${tandc}")
     `;
@@ -65,7 +65,7 @@ router.get('/view-family', function (req, res, next) {
     if (!req.session.FamilyID) {
         res.redirect('/');
     } else {
-        var query = "SELECT * FROM FamilyHead";
+        var query = "SELECT * FROM FamilyHeadMaster";
         database.query(query, function (error, data) {
             if (error) {
                 throw error;
@@ -94,7 +94,7 @@ router.post('/update_family_head', function (request, response, next) {
         var aadhar = request.body.Aadhar.trim();
 
         var query = `
-    UPDATE FamilyHead
+    UPDATE FamilyHeadMaster
     SET Gender = "${gender}", 
     Surname = "${surname}", 
     Gotra = "${gotra}", 
@@ -126,7 +126,7 @@ router.get('/delete_family_head/:FamilyID', function (request, response, next) {
         var family_id = request.params.FamilyID;
 
         var query = `
-    DELETE FROM FamilyHead WHERE FamilyID = "${family_id}"
+    DELETE FROM FamilyHeadMaster WHERE FamilyID = "${family_id}"
     `;
 
         database.query(query, function (error, data) {
@@ -148,7 +148,7 @@ router.get('/view_family_members/:FamilyID', function (request, response, next) 
         var family_id = request.params.FamilyID;
 
         var query = `
-    SELECT * FROM FamilyMember WHERE FamilyID = "${family_id}"
+    SELECT * FROM FamilyMemberMaster WHERE FamilyID = "${family_id}"
     `;
 
         database.query(query, function (error, data) {
@@ -182,7 +182,7 @@ router.post('/update_family_member', function (request, response, next) {
         console.log(member_id);
 
         var query = `
-    UPDATE FamilyMember
+    UPDATE FamilyMemberMaster
     SET Gender = "${gender}", 
     Surname = "${surname}", 
     Gotra = "${gotra}", 
@@ -216,7 +216,7 @@ router.get('/delete_family_member/:MemberID/:FamilyID', function (request, respo
         var family_id = request.params.FamilyID;
 
         var query = `
-    DELETE FROM FamilyMember WHERE MemberID = "${member_id}"
+    DELETE FROM FamilyMemberMaster WHERE MemberID = "${member_id}"
     `;
 
         database.query(query, function (error, data) {
@@ -235,7 +235,7 @@ router.get('/add-family-member', function (req, res, next) {
     if (!req.session.FamilyID) {
         res.redirect('/');
     } else {
-        var query = "SELECT DISTINCT FamilyID FROM FamilyHead";
+        var query = "SELECT DISTINCT FamilyID FROM FamilyHeadMaster";
         database.query(query, function (error, data) {
             if (error) {
                 throw error;
@@ -265,7 +265,7 @@ router.post('/add_family_member', function (request, response, next) {
         var tandc = request.body.tandc;
 
         var query = `
-    INSERT INTO FamilyMember
+    INSERT INTO FamilyMemberMaster
     (FamilyID, Gender, Surname, Gotra, FirstName, MiddleName, Mobile, RelationToFamHead, EmailID, Native, Aadhar, TandC)
     VALUES ("${family_id}", "${gender}", "${surname}", "${gotra}", "${first_name}", "${middle_name}", "${mobile}", "${RelationToFamHead}", "${email}", "${native}", "${aadhar}", "${tandc}")
     `;
