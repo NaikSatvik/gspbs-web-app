@@ -1,4 +1,7 @@
+var crypto = require('crypto');
+var hash = crypto.createHash('sha256'); // creating hash object
 var express = require('express');
+const { type } = require('os');
 var router = express.Router();
 
 var database = require('../database');
@@ -7,59 +10,6 @@ var database = require('../database');
 router.get('/', function (req, res, next) {
   res.render('login', { session: req.session });
 });
-
-/* Login API */
-// router.post('/login', function (request, response, next) {
-
-//   var family_id = request.body.family_id;
-//   var Password = request.body.user_password;
-
-//   if (family_id && Password) {
-//     query = `
-//       SELECT * FROM FamilyHead 
-//       WHERE FamilyID = "${family_id}"
-//       `;
-
-//     database.query(query, function (error, data) {
-
-//       console.log(data.length);
-//       if (data.length > 0) {
-//         for (var count = 0; count < data.length; count++) {
-//           if (data[count].Password == Password) {
-//             request.session.FamilyID = data[count].FamilyID;
-//             request.session.Surname = data[count].Surname;
-//             request.session.FirstName = data[count].FirstName;
-//             console.log(request.session);
-
-//             if (request.session.FamilyID == "0000") {
-//               response.redirect("/dashboard");
-//             } else {
-//               response.redirect("/home");
-//             }
-//           }
-//           else {
-//             // request.flash('danger', 'Entered Password is Incorrect.');
-//             // response.redirect('/');
-//             response.send('Incorrect Password');
-//           }
-//         }
-//       }
-//       else {
-//         // request.flash('danger', 'Entered Family-ID is Incorrect.');
-//         response.send('Incorrect Family ID');
-//       }
-//       // response.end();
-//       response.redirect('/');
-//     });
-//   }
-//   else {
-//     // request.flash('danger', 'Please Enter Family ID and Password Details.');
-//     // response.redirect('/');
-//     response.send('Please Enter Family ID and Password Details.');
-//     response.end();
-//   }
-// });
-
 
 /* Login API */
 router.post('/login', function (request, response, next) {
@@ -71,34 +21,23 @@ router.post('/login', function (request, response, next) {
   if (family_id && Password) {
     query = `
       SELECT * FROM FamilyHeadMaster
-      WHERE FamilyID = "${family_id}"
+      WHERE FamilyID = "${family_id}" and Password = "${Password}"
       `;
 
     database.query(query, function (error, data) {
+      if (data.length == 1) {
+        request.session.FamilyID = data[0].FamilyID;
+        request.session.Surname = data[0].Surname;
+        request.session.FirstName = data[0].FirstName;
 
-      console.log(data.length);
-      if (data.length > 0) {
-        for (var count = 0; count < data.length; count++) {
-          if (data[count].Password == Password) {
-            request.session.FamilyID = data[count].FamilyID;
-            request.session.Surname = data[count].Surname;
-            request.session.FirstName = data[count].FirstName;
-            // console.log(data);
-            console.log(request.session.id);
+        console.log(request.session.id);
+        console.log(hash.update('nodejsera', 'utf-8').digest('hex'));
 
-            if (request.session.FamilyID == "0000") {
-              response.redirect("/dashboard");
-            } else {
-              response.redirect("/home");
-            }
-          }
-          else {
-            response.send('Incorrect Password');
-          }
+        if (request.session.FamilyID == "0000") {
+          response.redirect("/dashboard");
+        } else {
+          response.redirect("/home");
         }
-      }
-      else {
-        response.send('Incorrect Family ID');
       }
       response.end();
     });
