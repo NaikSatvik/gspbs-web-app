@@ -12,6 +12,10 @@ var indexRouter = require('./routes/login');
 var dashRouter = require('./routes/dashboard');
 var manageFamiliesRouter = require('./routes/manageFamilies');
 var manageEventsRouter = require('./routes/manageEvents');
+var manageHomeRouter = require('./routes/manageHome');
+var manageLoginReport = require('./routes/manageLoginReport');
+var manageRegistrationRouter = require('./routes/manageRegistration');
+var manageRequestsRouter = require('./routes/manageRequests');
 // 
 
 var app = express();
@@ -44,6 +48,10 @@ app.use('/', indexRouter);
 app.use('/', dashRouter);
 app.use('/', manageFamiliesRouter);
 app.use('/', manageEventsRouter);
+app.use('/', manageHomeRouter);
+app.use('/', manageLoginReport);
+app.use('/', manageRegistrationRouter);
+app.use('/', manageRequestsRouter);
 // 
 
 // catch 404 and forward to error handler

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Admin Dashboard</title>
+    <title>View Reports</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -20,7 +20,8 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 <body data-sidebar="dark">
@@ -132,11 +133,6 @@
                         <li>
                             <a href="" class="waves-effect">
                                 <i class="mdi mdi-calendar-month"></i>
-                                <% if(user_requests_count != 0) { %>
-                                    <span class="badge badge-pill badge-success float-right">
-                                        <%= user_requests_count %>
-                                    </span>
-                                    <% } %>
                                 <span>Requests</span>
                             </a>
                         </li>
@@ -152,6 +148,7 @@
                                 <li><a href="/add-family-member">Add Family Member</a></li>
                             </ul>
                         </li>
+
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="mdi mdi-google-pages"></i>
@@ -164,7 +161,7 @@
                         </li>
 
                         <li>
-                            <a href="" class="waves-effect">
+                            <a href="/login-reports" class="waves-effect">
                                 <i class="mdi mdi-file-document-box-check-outline"></i>
                                 <span>Login Reports</span>
                             </a>
@@ -189,41 +186,86 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Dashboard</h4>
+                                <h4 class="mb-0 font-size-18">View Login Report</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">GSPBS</a></li>
-                                        <li class="breadcrumb-item active">Dashboard</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Login Report</a>
+                                        </li>
                                     </ol>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
-                    <!-- end page title -->
 
-                    <div class="row">
+                    <% if(message.length> 0) { %>
+                        <div class="alert alert-success">
+                            <%= message %>
+                        </div>
+                        <% } %>
 
-                    </div>
-                    <!-- end row -->
+                            <% if(messageRed.length> 0) { %>
+                                <div class="alert alert-danger">
+                                    <%= messageRed %>
+                                </div>
+                                <% } %>
 
-                    <div class="row">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="header-title">Login Report</h4>
+                                                    <p class="card-title-desc">Description</p>
 
-                    </div>
-                    <!-- end row -->
+                                                    <% if(action=='add' ) { %>
 
-                    <div class="row">
+                                                        <% } else { %>
+                                                            <div>
+                                                                <div>
+                                                                    <table class="table table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Family Id</th>
+                                                                                <th>Name</th>
+                                                                                <th>Login Time</th>
+                                                                                <th>Logut Time</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <% if(queriedData.length> 0)
+                                                                            {
+                                                                            queriedData.forEach(function(data){
+                                                                            %>
+                                                                            <tr>
+                                                                                <td class="nr1">
+                                                                                    <%= data.FamilyID %>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%= data.Surname %>
+                                                                                    <%= data.FirstName %>
+                                                                                </td>
+                                                                                <td class="nr5">
+                                                                                    <%= data.loginAt %>
+                                                                                </td>
+                                                                                <td class="nr6">
+                                                                                    <%= data.loggedOutAt %>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <% }); } else { %>
+                                                                                <tr>
+                                                                                    <td colspan="5">No Data Found</td>
+                                                                                </tr>
+                                                                                <% } %>
+                                                                    </table>
+                                                                </div>
 
-                    </div>
-                    <!-- end row -->
-
-
-                    <div class="row">
-
-                    </div>
-                    <!-- end row -->
+                                                            </div>
+                                                            <% } %>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end col -->
+                                    </div> <!-- end row -->
 
                 </div> <!-- container-fluid -->
             </div>
@@ -239,7 +281,32 @@
 
     <!-- Right bar overlay-->
     <!-- <div class="rightbar-overlay"></div> -->
+    <script>
+        $(".use-address").click(function () {
+            var $row = $(this).closest("tr"); // Find the row
+            var $familyId = $row.find(".nr1").text(); // Find the id
+            var $Surname = $row.find(".nr2").text();
+            var $MiddleName = $row.find(".nr3").text();
+            var $FirstName = $row.find(".nr4").text();
+            var $Gender = $row.find(".nr5").text();
+            var $Gotra = $row.find(".nr6").text();
+            var $Email = $row.find(".nr7").text();
+            var $Mobile = $row.find(".nr8").text();
+            var $Native = $row.find(".nr9").text();
+            var $Aadhar = $row.find(".nr10").text();
 
+            $("#familyId").val($familyId);
+            $("#Surname").val($Surname);
+            $("#MiddleName").val($MiddleName);
+            $("#FirstName").val($FirstName);
+            $("#Gender").val($Gender);
+            $("#Gotra").val($Gotra);
+            $("#Email").val($Email);
+            $("#Mobile").val($Mobile);
+            $("#Native").val($Native);
+            $("#Aadhar").val($Aadhar);
+        });
+    </script>
     <!-- JAVASCRIPT -->
     <script src="assets/libs/jquery/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

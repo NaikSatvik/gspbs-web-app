@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
 
 var database = require('../database');
 
@@ -43,10 +44,13 @@ router.post('/add_family_head', function (request, response, next) {
         var aadhar = request.body.aadhar;
         var tandc = request.body.tandc;
 
+        const hash = crypto.createHash('sha256'); // creating hash object
+        var Password = hash.update("GSPBS",'utf-8').digest('hex');
+
         var query = `
     INSERT INTO FamilyHeadMaster
     (FamilyID, Password, Gender, Surname, Gotra, FirstName, MiddleName, Mobile, EmailID, Native, Aadhar, TandC)
-    VALUES ("${family_id}", "GSPBS", "${gender}", "${surname}", "${gotra}", "${first_name}", "${middle_name}", "${mobile}", "${email}", "${native}", "${aadhar}", "${tandc}")
+    VALUES ("${family_id}", "${Password}", "${gender}", "${surname}", "${gotra}", "${first_name}", "${middle_name}", "${mobile}", "${email}", "${native}", "${aadhar}", "${tandc}")
     `;
 
         database.query(query, function (error, data) {
