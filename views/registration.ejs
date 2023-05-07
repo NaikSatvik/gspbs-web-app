@@ -23,6 +23,48 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="assets/homePage/css/style.css" rel="stylesheet">
+
+    <style>
+        .dropbtn {
+          background-color: #FFA500;
+          color: white;
+          padding-left: 5px;
+          padding-right: 5px;
+          font-size: 15px;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .dropbtn:hover, .dropbtn:focus {
+          background-color: #FF7417;
+        }
+        
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 160px;
+          overflow: auto;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown a:hover {background-color: #ddd;}
+        
+        .show {display: block;}
+    </style>
 </head>
 
 <body>
@@ -49,6 +91,35 @@
                         <a href="pricing.html" class="nav-item nav-link">Contact</a>
                     </div>
                 </div>
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn"><%= session.FamilyID %></button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a><%= session.FirstName %></a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+
+                <script>
+                    /* When the user clicks on the button, 
+                    toggle between hiding and showing the dropdown content */
+                    function myFunction() {
+                      document.getElementById("myDropdown").classList.toggle("show");
+                    }
+                    
+                    // Close the dropdown if the user clicks outside of it
+                    window.onclick = function(event) {
+                      if (!event.target.matches('.dropbtn')) {
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                          var openDropdown = dropdowns[i];
+                          if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                          }
+                        }
+                      }
+                    }
+                    </script>
             </nav>
         </div>
     </div>
@@ -114,7 +185,7 @@
                     <div class="col-md-7">
                         <div class="contact-form">
                             <div id="success"></div>
-                            <form method="post" action="/register-user-request">
+                            <form method="post" action="/register-user-request" enctype="multipart/form-data">
                                 <div class="control-group">
                                     <input type="text" name="first_name" class="form-control p-4" id="subject" placeholder="First Name" required="required" />
                                     <p class="help-block text-danger"></p>
@@ -265,6 +336,10 @@
                                         <option value="Other">Other</option>
                                     </select>
                                     <p class="help-block text-danger"></p>
+                                </div>
+
+                                <div class="control-group">
+                                    <p class="help-block"> <b>Upload Aadhar</b> &nbsp;&nbsp;&nbsp;&nbsp;  <input type="file" multiple name="file" accept="image/x-png,image/jpeg" required></p>
                                 </div>
 
                                 <div>
